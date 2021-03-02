@@ -1,0 +1,67 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {
+    "@sanity/field": "^2.5.0",
+    "@sanity/form-builder": "^2.5.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "sanity-plugin-bynder-input",
+  "author": "Rune Botten",
+  "module": "dist/sanity-plugin-bynder-input.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/sanity-plugin-bynder-input.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/sanity-plugin-bynder-input.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.9.2",
+    "@types/react": "^17.0.2",
+    "@types/video.js": "^7.3.15",
+    "autoprefixer": "^9.0.0",
+    "cssnano": "^4.1.10",
+    "husky": "^5.1.3",
+    "rollup-plugin-postcss": "^4.0.0",
+    "size-limit": "^4.9.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.1.0",
+    "typescript": "^4.2.2"
+  },
+  "dependencies": {
+    "video.js": "^7.11.4"
+  }
+}
