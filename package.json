@@ -1,11 +1,13 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "sanity.json",
+    "config.dist.json"
   ],
   "engines": {
     "node": ">=10"
@@ -36,7 +38,7 @@
     "trailingComma": "es5"
   },
   "name": "sanity-plugin-bynder-input",
-  "author": "Rune Botten",
+  "author": "Sanity.io <hello@sanity.io>",
   "module": "dist/sanity-plugin-bynder-input.esm.js",
   "size-limit": [
     {

@@ -2,11 +2,11 @@ import React from 'react';
 import { DiffFromTo, SchemaType } from '@sanity/field/diff';
 import styles from './ImagePreview.css';
 
-type DiffComponentProps = {
+type ComponentProps = {
   value: any;
 };
 
-function DiffComponent({ value }: DiffComponentProps) {
+function Component({ value }: ComponentProps) {
   if (value && value.previewUrl) {
     return (
       <div>
@@ -31,7 +31,7 @@ const BynderDiff = ({ diff, schemaType }: DiffProps) => {
     <DiffFromTo
       diff={diff}
       schemaType={schemaType}
-      previewComponent={DiffComponent}
+      previewComponent={Component}
     />
   );
 };
