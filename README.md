@@ -1,5 +1,8 @@
 # Sanity + Bynder = 🌁
 
+![bynder demo](https://user-images.githubusercontent.com/38528/120554854-1ee5c580-c3af-11eb-9b05-0b35c6810497.gif)
+
+
 This is a custom input component enabling your familiar Bynder user inferface in Sanity Studio, letting you pick any asset you are managing on Bynder and still serve it from Bynder in your frontends.
 
 ## Installation
