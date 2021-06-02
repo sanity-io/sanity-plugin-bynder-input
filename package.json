@@ -23,8 +23,8 @@
   "peerDependencies": {
     "@sanity/field": "^2.5.0",
     "@sanity/form-builder": "^2.5.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^16 || ^17",
+    "react-dom": "^16 || ^17"
   },
   "husky": {
     "hooks": {
@@ -54,8 +54,8 @@
     "@size-limit/preset-small-lib": "^4.9.2",
     "@types/react": "^17.0.2",
     "@types/video.js": "^7.3.15",
-    "autoprefixer": "^9.0.0",
-    "cssnano": "^4.1.10",
+    "autoprefixer": "^10.2.6",
+    "cssnano": "^5.0.5",
     "husky": "^5.1.3",
     "rollup-plugin-postcss": "^4.0.0",
     "size-limit": "^4.9.2",
