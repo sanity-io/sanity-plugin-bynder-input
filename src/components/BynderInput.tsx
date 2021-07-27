@@ -53,6 +53,8 @@ const BynderInput = (props: Props) => {
             type: asset.type,
             previewUrl,
             previewImg: asset.files.webImage.url,
+            datUrl: asset.files.transformBaseUrl.url,
+            description: asset.description,
           }),
         ])
       );
