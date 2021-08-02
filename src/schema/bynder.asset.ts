@@ -30,6 +30,14 @@ export default {
       type: 'string',
       name: 'previewImg',
     },
+    {
+      type: 'string',
+      name: 'datUrl',
+    },
+    {
+      type: 'string',
+      name: 'description',
+    },
   ],
   inputComponent: BynderInput,
   diffComponent: BynderDiff,
