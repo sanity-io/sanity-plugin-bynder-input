@@ -37,12 +37,22 @@ const BynderInput = (props: Props) => {
     }
   };
 
+  const getAspectRatio = (dimensions: {
+    width: number;
+    height: number;
+  }): number => dimensions.height / dimensions.width;
+
   const openMediaSelector = () => {
     const { onChange, type } = props;
     const onSuccess = (assets: any[], additionalInfo: Record<string, any>) => {
       console.log(additionalInfo);
       const asset = assets[0];
+      const webImage = asset.files.webImage;
       const previewUrl = getPreviewUrl(asset);
+      const aspectRatio = getAspectRatio({
+        width: webImage.width,
+        height: webImage.height,
+      });
       onChange(
         PatchEvent.from([
           set({
@@ -52,9 +62,10 @@ const BynderInput = (props: Props) => {
             databaseId: asset.databaseId,
             type: asset.type,
             previewUrl,
-            previewImg: asset.files.webImage.url,
+            previewImg: webImage.url,
             datUrl: asset.files.transformBaseUrl?.url,
             description: asset.description,
+            aspectRatio,
           }),
         ])
       );

@@ -38,6 +38,10 @@ export default {
       type: 'string',
       name: 'description',
     },
+    {
+      type: 'number',
+      name: 'aspectRatio',
+    },
   ],
   inputComponent: BynderInput,
   diffComponent: BynderDiff,
