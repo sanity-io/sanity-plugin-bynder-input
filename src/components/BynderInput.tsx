@@ -31,7 +31,8 @@ const BynderInput = (props: Props) => {
   const getPreviewUrl = (asset: Record<string, any>) => {
     switch (asset.type) {
       case 'VIDEO':
-        return asset.previewUrls[0];
+        // if orignal asset is available (public videos only) use that if not fall back to the preview urls
+        return asset.files?.original?.url ?? asset.previewUrls[0];
       default:
         return asset.files.webImage.url;
     }
