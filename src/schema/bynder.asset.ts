@@ -42,6 +42,10 @@ export default {
       type: 'number',
       name: 'aspectRatio',
     },
+    {
+      type: 'string',
+      name: 'videoUrl',
+    },
   ],
   inputComponent: BynderInput,
   diffComponent: BynderDiff,

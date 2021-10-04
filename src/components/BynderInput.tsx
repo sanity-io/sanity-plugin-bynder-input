@@ -28,7 +28,7 @@ const BynderInput = (props: Props) => {
     onChange(PatchEvent.from([unset()]));
   };
 
-  const getPreviewUrl = (asset: Record<string, any>) => {
+  const getPreviewUrl = (asset: Props['type']) => {
     switch (asset.type) {
       case 'VIDEO':
         return asset.previewUrls[0];
@@ -37,18 +37,25 @@ const BynderInput = (props: Props) => {
     }
   };
 
+  const getVideoUrl = (asset: Props['type']) => {
+    if (asset.type === 'VIDEO') {
+      // if original asset is available (public videos only) use that if not fall back to the preview url
+      return asset.files?.original?.url ?? asset.previewUrls[0];
+    }
+    return null;
+  };
+
   const getAspectRatio = (dimensions: {
     width: number;
     height: number;
   }): number => dimensions.height / dimensions.width;
 
   const openMediaSelector = () => {
-    const { onChange, type } = props;
-    const onSuccess = (assets: any[], additionalInfo: Record<string, any>) => {
-      console.log(additionalInfo);
+    const { onChange, type, value } = props;
+    const onSuccess = (assets: any[]) => {
       const asset = assets[0];
       const webImage = asset.files.webImage;
-      const previewUrl = getPreviewUrl(asset);
+
       const aspectRatio = getAspectRatio({
         width: webImage.width,
         height: webImage.height,
@@ -56,14 +63,16 @@ const BynderInput = (props: Props) => {
       onChange(
         PatchEvent.from([
           set({
+            _key: value?._key,
             _type: type.name,
             id: asset.id,
             name: asset.name,
             databaseId: asset.databaseId,
             type: asset.type,
-            previewUrl,
+            previewUrl: getPreviewUrl(asset),
             previewImg: webImage.url,
             datUrl: asset.files.transformBaseUrl?.url,
+            videoUrl: getVideoUrl(asset),
             description: asset.description,
             aspectRatio,
           }),
@@ -104,7 +113,8 @@ const BynderInput = (props: Props) => {
           sources={[{ src: value.previewUrl }]}
         />
       );
-    } else {
+    }
+    if (value.type === 'IMAGE') {
       preview = (
         <img
           alt="preview"
@@ -112,6 +122,7 @@ const BynderInput = (props: Props) => {
           style={{ maxWidth: '100%', height: 'auto' }}
         />
       );
+      // TODO: Add preview for document / audio types and empty state
     }
   }
 
