@@ -1,6 +1,6 @@
 import React from 'react';
 import { loadBynder } from '../utils';
-import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event';
+import PatchEvent, { set, unset } from '@sanity/form-builder';
 import pluginConfig from 'config:bynder-input';
 import ButtonGrid from 'part:@sanity/components/buttons/button-grid';
 import Button from 'part:@sanity/components/buttons/default';
