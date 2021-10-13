@@ -33,9 +33,9 @@
     "noEmit": true,
     "baseUrl": "./",
     "paths": {
-      "@sanity/form-builder": [
+      "@sanity/form-builder/PatchEvent": [
         "./node_modules/@sanity/form-builder/dist/dts/PatchEvent.d.ts"
-      ],
+      ]
     }
   }
 }
