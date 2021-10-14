@@ -21,8 +21,8 @@
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
-    "@sanity/field": "^2.5.0",
-    "@sanity/form-builder": "^2.5.0",
+    "@sanity/field": "^2.10",
+    "@sanity/form-builder": "^2.10",
     "react": "^16 || ^17",
     "react-dom": "^16 || ^17"
   },
