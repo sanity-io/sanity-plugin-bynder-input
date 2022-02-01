@@ -1,23 +1,17 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
-export default class VideoPlayer extends React.Component<
-  VideoJsPlayerOptions,
-  any
-> {
-  videoNode?: HTMLVideoElement;
-  player?: VideoJsPlayer;
-  componentDidMount() {
-    this.player = videojs(this.videoNode, this.props);
-  }
+const VideoPlayer = (props:VideoJsPlayerOptions) => {
+  const videoNode = useRef<HTMLVideoElement>(null)
+  const [player, setPlayer] = useState<VideoJsPlayer>()
 
-  componentWillUnmount() {
-    if (this.player) {
-      this.player.dispose();
+  useEffect(() => {
+    if (videoNode.current) {
+      setPlayer(videojs(videoNode.current, props))
     }
-  }
+    return () => player?.dispose()
+  }, [videoNode])
 
-  render() {
     return (
       <div>
         <link
@@ -27,14 +21,11 @@ export default class VideoPlayer extends React.Component<
         <div data-vjs-player style={{ marginBottom: '16px' }}>
           <video
             className="video-js vjs-16-9 vjs-big-play-centered"
-            ref={node => {
-              if (node) {
-                this.videoNode = node;
-              }
-            }}
+            ref={videoNode}
           ></video>
         </div>
       </div>
     );
-  }
 }
+
+export default VideoPlayer
