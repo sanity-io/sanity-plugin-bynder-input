@@ -82,7 +82,9 @@ const BynderInput = (props: Props) => {
 
     const options: Record<string, any> = {
       language: pluginConfig.language || 'en_US',
-      defaultDomain: pluginConfig.portalDomain,
+      portal: {
+        url: pluginConfig.portalDomain,
+      },
       theme: {
         colorPrimary: '#156dff',
         colorButtonPrimary: '#156dff',
