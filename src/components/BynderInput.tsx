@@ -50,34 +50,63 @@ const BynderInput = (props: Props) => {
     height: number;
   }): number => dimensions.height / dimensions.width;
 
+  const getVideoAspectRatio = (previewImageUrl: string) =>
+    new Promise((resolve, reject) => {
+      const img = new Image();
+
+      img.onload = () => {
+        resolve(
+          getAspectRatio({
+            width: img.width,
+            height: img.height,
+          })
+        );
+      };
+      img.onerror = err => reject(err);
+
+      img.src = previewImageUrl;
+    });
+
   const openMediaSelector = () => {
     const { onChange, type, value } = props;
     const onSuccess = (assets: any[]) => {
       const asset = assets[0];
       const webImage = asset.files.webImage;
-
+      
       const aspectRatio = getAspectRatio({
         width: webImage.width,
         height: webImage.height,
       });
-      onChange(
-        PatchEvent.from([
-          set({
-            _key: value?._key,
-            _type: type.name,
-            id: asset.id,
-            name: asset.name,
-            databaseId: asset.databaseId,
-            type: asset.type,
-            previewUrl: getPreviewUrl(asset),
-            previewImg: webImage.url,
-            datUrl: asset.files.transformBaseUrl?.url,
-            videoUrl: getVideoUrl(asset),
-            description: asset.description,
-            aspectRatio,
-          }),
-        ])
-      );
+      const mediaData = {
+        _key: value?._key,
+        _type: type.name,
+        id: asset.id,
+        name: asset.name,
+        databaseId: asset.databaseId,
+        type: asset.type,
+        previewUrl: getPreviewUrl(asset),
+        previewImg: webImage.url,
+        datUrl: asset.files.transformBaseUrl?.url,
+        videoUrl: getVideoUrl(asset),
+        description: asset.description,
+        aspectRatio,
+      };
+
+      if (asset.type === 'VIDEO') {
+        getVideoAspectRatio(webImage.url)
+          .then(ratio => {
+            onChange(
+              PatchEvent.from([set({ ...mediaData, aspectRatio: ratio })])
+            );
+          })
+          .catch(err => {
+            // video aspect ratio couldn't be set, but should still set the rest of the data
+            console.log("Error setting video aspect ratio:", err);
+            onChange(PatchEvent.from([set(mediaData)]));
+          });
+      } else {
+        onChange(PatchEvent.from([set(mediaData)]));
+      }
     };
 
     const options: Record<string, any> = {
