@@ -1,34 +1,33 @@
 import React from 'react';
 import { loadBynder } from '../utils';
-import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent';
-import pluginConfig from 'config:bynder-input';
-import ButtonGrid from 'part:@sanity/components/buttons/button-grid';
-import Button from 'part:@sanity/components/buttons/default';
-import Fieldset from 'part:@sanity/components/fieldsets/default';
+import { ObjectInputProps, PatchEvent, set, unset } from 'sanity';
 import VideoPlayer from './VideoPlayer';
+import { Box, Button, Flex } from '@sanity/ui';
 
 declare global {
+  // eslint-disable-next-line no-unused-vars
   interface Window {
     BynderCompactView: any;
   }
 }
 
-type Props = {
-  type: Record<string, any>;
-  onChange: any;
-  value: Record<string, any>;
-  level: number;
-  readOnly: boolean;
-  markers: any[];
-};
+export interface BynderConfig {
+  portalDomain: string;
+  language: 'en_US' | string;
+}
 
-const BynderInput = (props: Props) => {
+export interface BynderInputProps extends ObjectInputProps {
+  pluginConfig: BynderConfig;
+}
+
+export function BynderInput(props: BynderInputProps) {
+  const { value, readOnly, schemaType, pluginConfig, onChange } = props;
+
   const removeValue = () => {
-    const { onChange } = props;
     onChange(PatchEvent.from([unset()]));
   };
 
-  const getPreviewUrl = (asset: Props['type']) => {
+  const getPreviewUrl = (asset: Record<string, any>) => {
     switch (asset.type) {
       case 'VIDEO':
         return asset.previewUrls[0];
@@ -37,7 +36,7 @@ const BynderInput = (props: Props) => {
     }
   };
 
-  const getVideoUrl = (asset: Props['type']) => {
+  const getVideoUrl = (asset: Record<string, any>) => {
     if (asset.type === 'VIDEO') {
       // if original asset is available (public videos only) use that if not fall back to the preview url
       return asset.files?.original?.url ?? asset.previewUrls[0];
@@ -62,24 +61,23 @@ const BynderInput = (props: Props) => {
           })
         );
       };
-      img.onerror = err => reject(err);
+      img.onerror = (err) => reject(err);
 
       img.src = previewImageUrl;
     });
 
   const openMediaSelector = () => {
-    const { onChange, type, value } = props;
-    const onSuccess = (assets: any[]) => {
+    const onSuccess = (assets: Record<string, any>[]) => {
       const asset = assets[0];
       const webImage = asset.files.webImage;
-      
+
       const aspectRatio = getAspectRatio({
         width: webImage.width,
         height: webImage.height,
       });
       const mediaData = {
         _key: value?._key,
-        _type: type.name,
+        _type: schemaType.name,
         id: asset.id,
         name: asset.name,
         databaseId: asset.databaseId,
@@ -94,14 +92,15 @@ const BynderInput = (props: Props) => {
 
       if (asset.type === 'VIDEO') {
         getVideoAspectRatio(webImage.url)
-          .then(ratio => {
+          .then((ratio) => {
             onChange(
               PatchEvent.from([set({ ...mediaData, aspectRatio: ratio })])
             );
           })
-          .catch(err => {
+          .catch((err) => {
             // video aspect ratio couldn't be set, but should still set the rest of the data
-            console.log("Error setting video aspect ratio:", err);
+            // eslint-disable-next-line no-console
+            console.error('Error setting video aspect ratio:', err);
             onChange(PatchEvent.from([set(mediaData)]));
           });
       } else {
@@ -122,7 +121,7 @@ const BynderInput = (props: Props) => {
       onSuccess,
     };
 
-    const { assetTypes } = type.options;
+    const { assetTypes } = schemaType.options;
     if (assetTypes) {
       options.assetTypes = assetTypes;
     }
@@ -131,8 +130,6 @@ const BynderInput = (props: Props) => {
       window.BynderCompactView.open(options);
     });
   };
-
-  const { value, type, markers, level, readOnly } = props;
 
   let preview;
   if (value) {
@@ -158,37 +155,31 @@ const BynderInput = (props: Props) => {
   }
 
   return (
-    <Fieldset
-      markers={markers}
-      //presence={presence.filter(item => item.path[0] === '$' || isInside.includes(item.identity))}
-      legend={type.title}
-      description={type.description}
-      level={level}
-    >
+    <>
       <div style={{ textAlign: 'center' }}>{preview}</div>
-
-      <ButtonGrid align="start">
-        <Button
-          disabled={readOnly}
-          inverted
-          title="Select an asset"
-          kind="default"
-          onClick={openMediaSelector}
-        >
-          Browse
-        </Button>
-        <Button
-          disabled={readOnly || !value}
-          color="danger"
-          inverted
-          title="Remove asset"
-          onClick={removeValue}
-        >
-          Remove
-        </Button>
-      </ButtonGrid>
-    </Fieldset>
+      <Flex gap={2} style={{ width: '100%' }}>
+        <Box flex={1}>
+          <Button
+            style={{ width: '100%' }}
+            disabled={readOnly}
+            mode="ghost"
+            text={'Browse'}
+            title="Select an asset"
+            onClick={openMediaSelector}
+          />
+        </Box>
+        <Box flex={1}>
+          <Button
+            style={{ width: '100%' }}
+            disabled={readOnly || !value}
+            tone="critical"
+            mode="ghost"
+            text={'Remove'}
+            title="Remove asset"
+            onClick={removeValue}
+          />
+        </Box>
+      </Flex>
+    </>
   );
-};
-
-export default BynderInput;
+}

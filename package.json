@@ -1,37 +1,50 @@
 {
+  "name": "sanity-plugin-bynder-input",
   "version": "1.4.0",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src",
-    "sanity.json",
-    "config.dist.json"
+  "description": "!bynder demo",
+  "keywords": [
+    "sanity",
+    "sanity-plugin"
   ],
-  "engines": {
-    "node": ">=10"
+  "homepage": "https://github.com/sanity-io/sanity-plugin-bynder-input#readme",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity-plugin-bynder-input/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sanity-io/sanity-plugin-bynder-input.git"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "exports": {
+    ".": {
+      "types": "./lib/src/index.d.ts",
+      "source": "./src/index.ts",
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.js",
+      "default": "./lib/index.esm.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/index.js",
+  "module": "./lib/index.esm.js",
+  "source": "./src/index.ts",
+  "types": "./lib/src/index.d.ts",
+  "files": [
+    "src",
+    "lib",
+    "v2-incompatible.js",
+    "sanity.json"
+  ],
   "scripts": {
-    "start": "tsdx watch",
-    "dev": "tsdx watch",
-    "build": "tsdx build",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
-  },
-  "peerDependencies": {
-    "@sanity/field": "^2.10",
-    "@sanity/form-builder": "^2.10",
-    "postcss": "8.4.5",
-    "react": "^16 || ^17",
-    "react-dom": "^16 || ^17"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
+    "prebuild": "npm run clean && plugin-kit verify-package --silent && pkg-utils",
+    "build": "pkg-utils build --strict",
+    "clean": "rimraf lib",
+    "link-watch": "plugin-kit link-watch",
+    "lint": "eslint src",
+    "prepare": "husky install",
+    "prepublishOnly": "npm run build",
+    "watch": "pkg-utils watch"
   },
   "prettier": {
     "printWidth": 80,
@@ -39,9 +52,47 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "sanity-plugin-bynder-input",
-  "author": "Sanity.io <hello@sanity.io>",
-  "module": "dist/sanity-plugin-bynder-input.esm.js",
+  "dependencies": {
+    "@sanity/incompatible-plugin": "^1.0.4",
+    "@sanity/ui": "^1.0.2",
+    "video.js": "^7.11.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@sanity/pkg-utils": "^1.20.4",
+    "@sanity/plugin-kit": "^2.2.0",
+    "@sanity/semantic-release-preset": "^2.0.4",
+    "@types/react": "^18",
+    "@types/video.js": "^7.3.15",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "autoprefixer": "^10.2.6",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-sanity": "^6.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.2",
+    "json5": "^2.2.2",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1",
+    "prettier-plugin-packagejson": "^2.3.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "rimraf": "^3.0.2",
+    "sanity": "^3.0.0",
+    "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "sanity": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
   "size-limit": [
     {
       "path": "dist/sanity-plugin-bynder-input.cjs.production.min.js",
@@ -51,26 +102,5 @@
       "path": "dist/sanity-plugin-bynder-input.esm.js",
       "limit": "10 KB"
     }
-  ],
-  "devDependencies": {
-    "@sanity/field": "^2.10",
-    "@sanity/form-builder": "^2.10",
-    "@size-limit/preset-small-lib": "^4.9.2",
-    "@types/react": "^17.0.2",
-    "@types/video.js": "^7.3.15",
-    "autoprefixer": "^10.2.6",
-    "cssnano": "^5.0.5",
-    "husky": "^5.1.3",
-    "postcss": "8.4.5",
-    "react": "^16 || ^17",
-    "react-dom": "^16 || ^17",
-    "rollup-plugin-postcss": "^4.0.0",
-    "size-limit": "^4.9.2",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.1.0",
-    "typescript": "^4.2.2"
-  },
-  "dependencies": {
-    "video.js": "^7.11.4"
-  }
+  ]
 }

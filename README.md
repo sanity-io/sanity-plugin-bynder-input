@@ -1,3 +1,7 @@
+> This is a **Sanity Studio v3** plugin.
+
+## Usage
+
 # Sanity + Bynder = 🌁
 
 ![bynder demo](https://user-images.githubusercontent.com/38528/120554854-1ee5c580-c3af-11eb-9b05-0b35c6810497.gif)
@@ -51,3 +55,24 @@ export default {
   ]
 }
 ```
+
+
+## License
+
+[MIT](LICENSE) © Sanity.io
+
+
+## Develop & test
+
+This plugin uses [@sanity/plugin-kit](https://github.com/sanity-io/plugin-kit)
+with default configuration for build & watch scripts.
+
+See [Testing a plugin in Sanity Studio](https://github.com/sanity-io/plugin-kit#testing-a-plugin-in-sanity-studio)
+on how to run this plugin with hotreload in the studio.
+
+### Release new version
+
+Run ["CI & Release" workflow](https://github.com/sanity-io/sanity-plugin-bynder-input/actions/workflows/main.yml).
+Make sure to select the main branch and check "Release new version".
+
+Semantic release will only release on configured branches, so it is safe to run release on any branch.

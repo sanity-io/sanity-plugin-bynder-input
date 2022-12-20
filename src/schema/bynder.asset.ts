@@ -1,7 +1,7 @@
-import BynderInput from '../components/BynderInput';
-import BynderDiff from '../components/BynderDiff';
+import { BynderDiff } from '../components/BynderDiff';
+import { defineType } from 'sanity';
 
-export default {
+export const bynderAssetSchema = defineType({
   name: 'bynder.asset',
   type: 'object',
   title: 'Bynder Asset',
@@ -47,18 +47,7 @@ export default {
       name: 'videoUrl',
     },
   ],
-  inputComponent: BynderInput,
-  diffComponent: BynderDiff,
-  /*
-  preview: {
-    select: {
-      playbackId: 'asset.playbackId',
-      status: 'asset.status',
-      duration: 'asset.data.duration',
-      thumbTime: 'asset.thumbTime',
-      filename: 'asset.filename'
-    },
-    component: Preview
-  }
-  */
-};
+  components: {
+    diff: BynderDiff,
+  },
+});

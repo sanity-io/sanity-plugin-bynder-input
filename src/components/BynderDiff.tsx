@@ -1,6 +1,6 @@
 import React from 'react';
-import { DiffFromTo, SchemaType } from '@sanity/field/diff';
-import styles from './ImagePreview.css';
+import { DiffFromTo, SchemaType } from 'sanity';
+//import styles from './ImagePreview.css';
 
 type ComponentProps = {
   value: any;
@@ -15,7 +15,7 @@ function Component({ value }: ComponentProps) {
     );
   }
   return (
-    <div className={styles.noImage}>
+    <div>
       <div>(no image)</div>
     </div>
   );
@@ -26,7 +26,7 @@ type DiffProps = {
   schemaType: SchemaType;
 };
 
-const BynderDiff = ({ diff, schemaType }: DiffProps) => {
+export const BynderDiff = ({ diff, schemaType }: DiffProps) => {
   return (
     <DiffFromTo
       diff={diff}
@@ -35,5 +35,3 @@ const BynderDiff = ({ diff, schemaType }: DiffProps) => {
     />
   );
 };
-
-export default BynderDiff;
