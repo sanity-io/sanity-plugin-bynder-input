@@ -3,3 +3,6 @@
 node_modules
 dist
 sanity-plugin-bynder-*.tgz
+
+*.iml
+.idea/
