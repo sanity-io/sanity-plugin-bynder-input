@@ -6,3 +6,4 @@ sanity-plugin-bynder-*.tgz
 
 *.iml
 .idea/
+lib

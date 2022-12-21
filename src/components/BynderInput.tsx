@@ -72,7 +72,7 @@ const BynderInput = (props: Props) => {
     const onSuccess = (assets: any[]) => {
       const asset = assets[0];
       const webImage = asset.files.webImage;
-      
+
       const aspectRatio = getAspectRatio({
         width: webImage.width,
         height: webImage.height,
@@ -101,7 +101,7 @@ const BynderInput = (props: Props) => {
           })
           .catch(err => {
             // video aspect ratio couldn't be set, but should still set the rest of the data
-            console.log("Error setting video aspect ratio:", err);
+            console.log('Error setting video aspect ratio:', err);
             onChange(PatchEvent.from([set(mediaData)]));
           });
       } else {

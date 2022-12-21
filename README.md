@@ -1,7 +1,9 @@
 # Sanity + Bynder = 🌁
 
-![bynder demo](https://user-images.githubusercontent.com/38528/120554854-1ee5c580-c3af-11eb-9b05-0b35c6810497.gif)
+> This is a **Sanity Studio v2** plugin.
+> For the v3 version, please refer to the [v3-branch](https://github.com/sanity-io/sanity-plugin-bynder-input).
 
+![bynder demo](https://user-images.githubusercontent.com/38528/120554854-1ee5c580-c3af-11eb-9b05-0b35c6810497.gif)
 
 This plugin adds your familiar Bynder user inferface in the Sanity Studio, letting you pick any asset you are managing on Bynder and still serve it from Bynder in your frontends.
 

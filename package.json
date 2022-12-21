@@ -55,6 +55,7 @@
   "devDependencies": {
     "@sanity/field": "^2.10",
     "@sanity/form-builder": "^2.10",
+    "@sanity/semantic-release-preset": "^2.0.4",
     "@size-limit/preset-small-lib": "^4.9.2",
     "@types/react": "^17.0.2",
     "@types/video.js": "^7.3.15",
