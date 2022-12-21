@@ -11,7 +11,7 @@ This plugin adds your familiar Bynder user inferface in the Sanity Studio, letti
 ## Installation
 
 ```bash
-npm install bynder-input
+npm install sanity-plugin-bynder-input
 ```
 
 ## Usage
