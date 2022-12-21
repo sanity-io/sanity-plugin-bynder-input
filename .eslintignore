@@ -5,3 +5,4 @@ lint-staged.config.js
 package.config.ts
 *.js
 dist
+*.css

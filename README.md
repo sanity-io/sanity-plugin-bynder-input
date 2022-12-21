@@ -1,6 +1,5 @@
 > This is a **Sanity Studio v3** plugin.
-
-## Usage
+> For the v2 version, please refer to the [v2 version](https://github.com/sanity-io/sanity-plugin-bynder-input/tree/studio-v2).
 
 # Sanity + Bynder = 🌁
 
@@ -12,48 +11,61 @@ This plugin adds your familiar Bynder user inferface in the Sanity Studio, letti
 ## Installation
 
 ```bash
-sanity install bynder-input
+npm install bynder-input
 ```
 
-This adds `bynder-input` to the plugins array of your sanity.json config and installs this npm module. You can also do those steps manually.
+## Usage
 
-## Configuration
+Add `bynderInputPlugin` to `plugins` in `sanity.config.ts` (or.js) and specify your Bynder portal domain. 
+You can also specify which language you want the Bynder widget UI to render.
 
-Edit or create `config/bynder-input.json` in your Studio folder and add your Bynder portal domain. You can also specify which language you want the Bynder widget UI to render.
+```
+ import {defineConfig} from 'sanity'
+ import {bynderInputPlugin} from 'sanity-plugin-bynder-input'
 
-```json
-{
-  "portalDomain": "https://wave-trial.getbynder.com/",
-  "language": "en_US"
-}
+ export const defineConfig({
+    // ... other config
+    plugins: [
+      bynderInputPlugin(
+        {
+          portalDomain: "https://wave-trial.getbynder.com/",
+          language: "en_US"
+        }
+      )
+    ]
+ })
 ```
 
 ## Specifying asset types
-The default selectable asset types are `image`, `audio`, `video` and `document`. You can restrict a field to one or more types with the `assetTypes` option in your schema. If you do not specify options all asset types will be available for selection.
+The default selectable asset types are `image`, `audio`, `video` and `document`. 
+You can restrict a field to one or more types with the `assetTypes` option in your schema. 
+If you do not specify options all asset types will be available for selection.
 
 Here is an example of a document that has one Bynder asset field restricted to only images, and another which can be either a video or an audio file.
 
 ```javascript
-export default {
+ import {defineType, defineField} from 'sanity'
+
+export const myDocumentSchema = defineType({
   type: "document",
   name: "article",
   fields: [
-    {
+    defineField({
       type: "bynder.asset",
       name: "image",
       options: {
         assetTypes: ["image"]
       }
-    },
-    {
+    }),
+    defineField({
       type: "bynder.asset",
       name: "temporalMedia",
       options: {
         assetTypes: ["video", "audio"]
       }
-    }
+    })
   ]
-}
+})
 ```
 
 

@@ -1,23 +1,33 @@
 import React from 'react';
 import { DiffFromTo, SchemaType } from 'sanity';
-//import styles from './ImagePreview.css';
+import { Flex } from '@sanity/ui';
 
 type ComponentProps = {
   value: any;
 };
 
 function Component({ value }: ComponentProps) {
-  if (value && value.previewUrl) {
+  if (value?.previewUrl || value?.previewImg) {
     return (
-      <div>
-        <img alt="preview" src={value.previewUrl} style={{ width: '100%' }} />
-      </div>
+      <Flex justify="center" align="center" height="fill" width="fill">
+        <img
+          alt="preview"
+          src={value?.previewImg ?? value?.previewUrl}
+          style={{
+            objectFit: 'contain',
+            margin: 'auto',
+            maxWidth: '100%',
+            maxHeight: '100%',
+          }}
+        />
+      </Flex>
     );
   }
+
   return (
-    <div>
+    <Flex justify="center" align="center" height="fill" width="fill">
       <div>(no image)</div>
-    </div>
+    </Flex>
   );
 }
 
@@ -32,6 +42,7 @@ export const BynderDiff = ({ diff, schemaType }: DiffProps) => {
       diff={diff}
       schemaType={schemaType}
       previewComponent={Component}
+      layout={'grid'}
     />
   );
 };

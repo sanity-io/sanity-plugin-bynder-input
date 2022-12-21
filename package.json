@@ -41,16 +41,10 @@
     "build": "pkg-utils build --strict",
     "clean": "rimraf lib",
     "link-watch": "plugin-kit link-watch",
-    "lint": "eslint src",
+    "lint": "eslint src/**/*",
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
     "watch": "pkg-utils watch"
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
   },
   "dependencies": {
     "@sanity/incompatible-plugin": "^1.0.4",

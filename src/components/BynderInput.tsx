@@ -3,6 +3,7 @@ import { loadBynder } from '../utils';
 import { ObjectInputProps, PatchEvent, set, unset } from 'sanity';
 import VideoPlayer from './VideoPlayer';
 import { Box, Button, Flex } from '@sanity/ui';
+import { BynderAssetValue } from '../schema/bynder.asset';
 
 declare global {
   // eslint-disable-next-line no-unused-vars
@@ -16,7 +17,7 @@ export interface BynderConfig {
   language: 'en_US' | string;
 }
 
-export interface BynderInputProps extends ObjectInputProps {
+export interface BynderInputProps extends ObjectInputProps<BynderAssetValue> {
   pluginConfig: BynderConfig;
 }
 
@@ -138,7 +139,7 @@ export function BynderInput(props: BynderInputProps) {
         <VideoPlayer
           controls
           poster={value.previewImg}
-          sources={[{ src: value.previewUrl }]}
+          sources={[{ src: value.previewUrl ?? '' }]}
         />
       );
     }
