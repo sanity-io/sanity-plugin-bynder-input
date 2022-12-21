@@ -10,11 +10,15 @@ This plugin adds your familiar Bynder user inferface in the Sanity Studio, letti
 ## Installation
 
 ```bash
-sanity install bynder-input
+yarn add sanity-plugin-bynder-input@studio-v2
 ```
 
-This adds `bynder-input` to the plugins array of your sanity.json config and installs this npm module. You can also do those steps manually.
-
+Next, add `"sanity-plugin-bynder-input"` to `sanity.json` plugins array:
+```json
+"plugins": [
+ "sanity-plugin-bynder-input"
+]
+```
 ## Configuration
 
 Edit or create `config/bynder-input.json` in your Studio folder and add your Bynder portal domain. You can also specify which language you want the Bynder widget UI to render.
