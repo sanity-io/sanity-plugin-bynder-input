@@ -47,6 +47,7 @@
     "watch": "pkg-utils watch"
   },
   "dependencies": {
+    "@rive-app/react-canvas": "^4.13.6",
     "@sanity/incompatible-plugin": "^1.0.4",
     "@sanity/ui": "^1.0.2",
     "video.js": "^7.11.4"

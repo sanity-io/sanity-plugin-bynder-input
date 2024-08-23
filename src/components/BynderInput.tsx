@@ -4,6 +4,7 @@ import { ObjectInputProps, PatchEvent, set, unset } from 'sanity';
 import VideoPlayer from './VideoPlayer';
 import { Box, Button, Flex } from '@sanity/ui';
 import { BynderAssetValue } from '../schema/bynder.asset';
+import RiveAnimationPreview from './RiveAnimationPreview';
 
 declare global {
   // eslint-disable-next-line no-unused-vars
@@ -23,7 +24,6 @@ export interface BynderInputProps extends ObjectInputProps<BynderAssetValue> {
 
 export function BynderInput(props: BynderInputProps) {
   const { value, readOnly, schemaType, pluginConfig, onChange } = props;
-
   const removeValue = () => {
     onChange(PatchEvent.from([unset()]));
   };
@@ -33,7 +33,7 @@ export function BynderInput(props: BynderInputProps) {
       case 'VIDEO':
         return asset.previewUrls[0];
       default:
-        return asset.files.webImage.url;
+        return asset.files.webImage ? asset.files.webImage.url : null;
     }
   };
 
@@ -45,18 +45,18 @@ export function BynderInput(props: BynderInputProps) {
     return null;
   };
 
-  const getAspectRatio = (dimensions: {
+  const getImageAspectRatio = (dimensions: {
     width: number;
     height: number;
   }): number => dimensions.height / dimensions.width;
 
-  const getVideoAspectRatio = (previewImageUrl: string) =>
+  const getAspectRatio = (previewImageUrl: string) =>
     new Promise((resolve, reject) => {
       const img = new Image();
 
       img.onload = () => {
         resolve(
-          getAspectRatio({
+          getImageAspectRatio({
             width: img.width,
             height: img.height,
           })
@@ -71,11 +71,12 @@ export function BynderInput(props: BynderInputProps) {
     const onSuccess = (assets: Record<string, any>[]) => {
       const asset = assets[0];
       const webImage = asset.files.webImage;
-
-      const aspectRatio = getAspectRatio({
-        width: webImage.width,
-        height: webImage.height,
-      });
+      const aspectRatio = webImage
+        ? getImageAspectRatio({
+            width: webImage.width,
+            height: webImage.height,
+          })
+        : null;
       const mediaData = {
         _key: value?._key,
         _type: schemaType.name,
@@ -84,22 +85,29 @@ export function BynderInput(props: BynderInputProps) {
         databaseId: asset.databaseId,
         type: asset.type,
         previewUrl: getPreviewUrl(asset),
-        previewImg: webImage.url,
-        datUrl: asset.files.transformBaseUrl?.url,
+        previewImg: webImage ? webImage.url : null,
+        datUrl: asset.files.transformBaseUrl
+          ? asset.files.transformBaseUrl.url
+          : null,
+        originalUrl: asset.originalUrl,
         videoUrl: getVideoUrl(asset),
         description: asset.description,
+        thumbnailUrl: asset.files.thumbnail ? asset.files.thumbnail.url : null,
         aspectRatio,
       };
-
-      if (asset.type === 'VIDEO') {
-        getVideoAspectRatio(webImage.url)
+      if (
+        (asset.type === 'VIDEO' ||
+          (asset.type === 'DOCUMENT' && asset.type.endsWith('.riv'))) &&
+        !!webImage
+      ) {
+        getAspectRatio(webImage.url)
           .then((ratio) => {
             onChange(
               PatchEvent.from([set({ ...mediaData, aspectRatio: ratio })])
             );
           })
           .catch((err) => {
-            // video aspect ratio couldn't be set, but should still set the rest of the data
+            // aspect ratio couldn't be set, but should still set the rest of the data
             // eslint-disable-next-line no-console
             console.error('Error setting video aspect ratio:', err);
             onChange(PatchEvent.from([set(mediaData)]));
@@ -108,7 +116,6 @@ export function BynderInput(props: BynderInputProps) {
         onChange(PatchEvent.from([set(mediaData)]));
       }
     };
-
     const options: Record<string, any> = {
       language: pluginConfig.language || 'en_US',
       portal: {
@@ -151,7 +158,21 @@ export function BynderInput(props: BynderInputProps) {
           style={{ maxWidth: '100%', height: 'auto' }}
         />
       );
-      // TODO: Add preview for document / audio types and empty state
+    }
+    if (
+      value.type === 'DOCUMENT' &&
+      value.originalUrl &&
+      value.originalUrl?.endsWith('.riv')
+    ) {
+      if (value.previewUrl && value.aspectRatio) {
+        preview = (
+          <RiveAnimationPreview
+            riveUrl={value.originalUrl}
+            previewImg={value.previewUrl}
+            aspectRatio={value.aspectRatio}
+          />
+        );
+      }
     }
   }
 
