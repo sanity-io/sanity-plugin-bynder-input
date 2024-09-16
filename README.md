@@ -68,6 +68,55 @@ export const myDocumentSchema = defineType({
 })
 ```
 
+## Specifying asset filters
+The default selectable asset types are `image`, `audio`, `video` and `document`. 
+You can restrict a field to one or more types with the `assetTypes` option in your schema. 
+If you do not specify options all asset types will be available for selection.
+
+Here is an example of a document that has one Bynder asset field restricted to only images, and another which can be either a video or an audio file.
+
+```javascript
+ import {defineType, defineField} from 'sanity'
+
+export const myDocumentSchema = defineType({
+  type: "document",
+  name: "article",
+  fields: [
+    defineField({
+      type: "bynder.asset",
+      name: "image",
+      options: {
+        assetFilter: {
+          tagNames_in: ["foo", "bar"],
+          showToolbar: true,
+        }
+      }
+    }),
+    defineField({
+      type: "bynder.asset",
+      name: "temporalMedia",
+      options: {
+        assetTypes: ["video", "audio"]
+      }
+    })
+  ]
+})
+```
+
+
+Here is the full set of options for the `assetFilter`.
+```typescript
+type BynderAssetFilterJson = {
+  assetType_in?: BynderAssetType[]; //predefined asset types
+  collectionId?: string; //predefined collection id
+  metapropertyOptionId_in?: string[]; //predefined metaproperty IDs
+  searchTerm?: string; //predefined search term
+  tagNames_in?: string[]; //predefined tags
+  isLimitedUse?: boolean; //whether or not this asset is marked as Limited Use
+  showToolbar?: boolean; //show toolbar for predefined filters (false by default)
+};
+```
+
 
 ## License
 

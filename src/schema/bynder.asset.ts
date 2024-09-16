@@ -3,8 +3,21 @@ import { defineType, ObjectDefinition, ObjectOptions } from 'sanity';
 
 const bynderAssetSchemaName = 'bynder.asset' as const;
 
+type BynderAssetType = 'AUDIO' | 'DOCUMENT' | 'IMAGE' | 'VIDEO';
+
+type BynderAssetFilterJson = {
+  assetType_in?: BynderAssetType[]; //predefined asset types
+  collectionId?: string; //predefined collection id
+  metapropertyOptionId_in?: string[]; //predefined metaproperty IDs
+  searchTerm?: string; //predefined search term
+  tagNames_in?: string[]; //predefined tags
+  isLimitedUse?: boolean; //whether or not this asset is marked as Limited Use
+  showToolbar?: boolean; //show toolbar for predefined filters (false by default)
+};
+
 export interface BynderAssetOptions extends ObjectOptions {
   assetTypes?: ('image' | 'video' | 'audio' | string)[];
+  assetFilter?: BynderAssetFilterJson;
 }
 
 /**

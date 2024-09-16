@@ -122,9 +122,13 @@ export function BynderInput(props: BynderInputProps) {
       onSuccess,
     };
 
-    const { assetTypes } = schemaType.options;
+    const { assetTypes, assetFilter } = schemaType.options;
     if (assetTypes) {
       options.assetTypes = assetTypes;
+    }
+
+    if (assetFilter) {
+      options.assetFilter = assetFilter;
     }
 
     loadBynder(() => {
