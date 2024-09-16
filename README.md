@@ -69,9 +69,8 @@ export const myDocumentSchema = defineType({
 ```
 
 ## Specifying asset filters
-The default selectable asset types are `image`, `audio`, `video` and `document`. 
-You can restrict a field to one or more types with the `assetTypes` option in your schema. 
-If you do not specify options all asset types will be available for selection.
+If you are looking for a more robust way to filter assets, you can restrict the initial set of assets with the `assetFilter` option. 
+
 
 Here is an example of a document that has one Bynder asset field restricted to only images, and another which can be either a video or an audio file.
 
@@ -86,23 +85,23 @@ export const myDocumentSchema = defineType({
       type: "bynder.asset",
       name: "image",
       options: {
+        assetTypes: ["image"],
         assetFilter: {
+          // Filter by tags
           tagNames_in: ["foo", "bar"],
+          // and show the toolbar to let the user adjust the filters
           showToolbar: true,
+          // You can optionally filter the asset types in the initial view like this 
+          // Note that a user can clear their view and still select the asset type. 
+          // If you need it fully enforced, use the `assetType` option instead
+          // 
+          // assetType_in: ["IMAGE"],          
         }
       }
     }),
-    defineField({
-      type: "bynder.asset",
-      name: "temporalMedia",
-      options: {
-        assetTypes: ["video", "audio"]
-      }
-    })
   ]
 })
 ```
-
 
 Here is the full set of options for the `assetFilter`.
 ```typescript
@@ -137,3 +136,4 @@ Run ["CI & Release" workflow](https://github.com/sanity-io/sanity-plugin-bynder-
 Make sure to select the main branch and check "Release new version".
 
 Semantic release will only release on configured branches, so it is safe to run release on any branch.
+
