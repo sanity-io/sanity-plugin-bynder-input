@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/sanity-io/sanity-plugin-bynder-input/compare/v2.0.1...v2.1.0) (2024-09-30)
+
+### Features
+
+- **configuration:** adds support for assetFilter option ([#17](https://github.com/sanity-io/sanity-plugin-bynder-input/issues/17)) ([9726a4b](https://github.com/sanity-io/sanity-plugin-bynder-input/commit/9726a4b6e844588b19ba82aefd8f0437e2e618d9))
+
 ## [2.0.1](https://github.com/sanity-io/sanity-plugin-bynder-input/compare/v2.0.0...v2.0.1) (2022-12-21)
 
 ### Bug Fixes
