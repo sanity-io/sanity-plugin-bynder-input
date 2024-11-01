@@ -68,7 +68,7 @@ export function BynderInput(props: BynderInputProps) {
     });
 
   const openMediaSelector = () => {
-    const onSuccess = (assets: Record<string, any>[]) => {
+    const onSuccess = (assets: Record<string, any>[], addInfo: Record<string, any>) => {
       const asset = assets[0];
       const webImage = asset.files.webImage;
 
@@ -89,6 +89,7 @@ export function BynderInput(props: BynderInputProps) {
         videoUrl: getVideoUrl(asset),
         description: asset.description,
         aspectRatio,
+        selectedUrl: addInfo.selectedFile?.url
       };
 
       if (asset.type === 'VIDEO') {
