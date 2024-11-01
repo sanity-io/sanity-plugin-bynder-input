@@ -28,12 +28,12 @@ export function BynderInput(props: BynderInputProps) {
     onChange(PatchEvent.from([unset()]));
   };
 
-  const getPreviewUrl = (asset: Record<string, any>) => {
+  const getPreviewUrl = (asset: Record<string, any>, addInfo: Record<string, any>) => {
     switch (asset.type) {
       case 'VIDEO':
         return asset.previewUrls[0];
       default:
-        return asset.files.webImage.url;
+        return addInfo.selectedFile ? addInfo.selectedFile?.url : asset.webImage.url;
     }
   };
 
@@ -83,7 +83,7 @@ export function BynderInput(props: BynderInputProps) {
         name: asset.name,
         databaseId: asset.databaseId,
         type: asset.type,
-        previewUrl: getPreviewUrl(asset),
+        previewUrl: getPreviewUrl(asset, addInfo),
         previewImg: webImage.url,
         datUrl: asset.files.transformBaseUrl?.url,
         videoUrl: getVideoUrl(asset),
