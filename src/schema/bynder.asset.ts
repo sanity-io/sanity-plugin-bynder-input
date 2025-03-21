@@ -46,6 +46,8 @@ export interface BynderAssetValue {
   previewUrl?: string;
   previewImg?: string;
   datUrl?: string;
+  originalUrl?: string;
+  thumbnailUrl?: string;
   description?: string;
   aspectRatio?: number;
   videoUrl?: string;
@@ -103,6 +105,14 @@ export const bynderAssetSchema = defineType({
     {
       type: 'string',
       name: 'videoUrl',
+    },
+    {
+      type: 'string',
+      name: 'originalUrl',
+    },
+    {
+      type: 'string',
+      name: 'thumbnailUrl',
     },
   ],
   components: {
