@@ -93,6 +93,14 @@ export const bynderAssetSchema = defineType({
       name: 'aspectRatio',
     },
     {
+      type: 'number',
+      name: 'width',
+    },
+    {
+      type: 'number',
+      name: 'height',
+    },
+    {
       type: 'string',
       name: 'videoUrl',
     },
