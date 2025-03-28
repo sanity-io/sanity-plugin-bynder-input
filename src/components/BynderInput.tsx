@@ -89,7 +89,11 @@ export function BynderInput(props: BynderInputProps) {
         videoUrl: getVideoUrl(asset),
         description: asset.description,
         aspectRatio,
-        selectedUrl: addInfo.selectedFile?.url
+        selectedUrl: addInfo.selectedFile?.url,
+        width: webImage.width,
+        height: webImage.height,
+        // If Bynder supported mimeType in the schema, we could set it here
+        //mimeType: webImage.mimeType,
       };
 
       if (asset.type === 'VIDEO') {
