@@ -49,7 +49,7 @@ export interface BynderAssetValue {
   description?: string;
   aspectRatio?: number;
   videoUrl?: string;
-  selectedUrs?: string;
+  selectedUrl?: string;
 }
 
 export const bynderAssetSchema = defineType({
