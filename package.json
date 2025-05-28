@@ -10,7 +10,6 @@
   "bugs": {
     "url": "https://github.com/sanity-io/sanity-plugin-bynder-input/issues"
   },
-  "browserslist": "extends @sanity/browserslist-config",
   "repository": {
     "type": "git",
     "url": "git@github.com:sanity-io/sanity-plugin-bynder-input.git"
@@ -57,7 +56,7 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@eslint/eslintrc": "^3.3.1",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^7.2.3",
+    "@sanity/pkg-utils": "^1.20.4",
     "@sanity/plugin-kit": "^2.2.0",
     "@sanity/semantic-release-preset": "^2.0.4",
     "@types/react": "^18",
@@ -99,5 +98,10 @@
       "path": "dist/sanity-plugin-bynder-input.esm.js",
       "limit": "10 KB"
     }
-  ]
+  ],
+  "sanityPlugin": {
+   "verifyPackage": {
+      "tsc": false
+   }
+}
 }
