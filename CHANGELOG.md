@@ -5,6 +5,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/sanity-io/sanity-plugin-bynder-input/compare/v2.1.0...v2.2.0) (2025-03-21)
+
+### Features
+
+- adds width and height to schema definition ([84d54ac](https://github.com/sanity-io/sanity-plugin-bynder-input/commit/84d54acd0eccbfc73a56738233d91a2f7d09f4c5))
+- pass the asset dimensions down to the sanity object ([6fe3a1c](https://github.com/sanity-io/sanity-plugin-bynder-input/commit/6fe3a1c83125f5a00c64fabcf20b4b92d162ea78))
+
 ## [2.1.0](https://github.com/sanity-io/sanity-plugin-bynder-input/compare/v2.0.1...v2.1.0) (2024-09-30)
 
 ### Features
