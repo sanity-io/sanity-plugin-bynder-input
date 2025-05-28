@@ -49,6 +49,7 @@ export interface BynderAssetValue {
   description?: string;
   aspectRatio?: number;
   videoUrl?: string;
+  selectedUrl?: string;
 }
 
 export const bynderAssetSchema = defineType({
@@ -103,6 +104,10 @@ export const bynderAssetSchema = defineType({
     {
       type: 'string',
       name: 'videoUrl',
+    },
+    {
+      type: 'string',
+      name: 'selectedUrl',
     },
   ],
   components: {

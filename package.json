@@ -54,6 +54,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "@eslint/eslintrc": "^3.3.1",
+    "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^1.20.4",
     "@sanity/plugin-kit": "^2.2.0",
     "@sanity/semantic-release-preset": "^2.0.4",
@@ -96,5 +98,10 @@
       "path": "dist/sanity-plugin-bynder-input.esm.js",
       "limit": "10 KB"
     }
-  ]
+  ],
+  "sanityPlugin": {
+   "verifyPackage": {
+      "tsc": false
+   }
+}
 }
