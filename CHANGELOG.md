@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/sanity-io/sanity-plugin-bynder-input/compare/v2.2.0...v2.3.0) (2025-06-10)
+
+### Features
+
+- support selectedFile.url for DAT & Derivatives ([e064909](https://github.com/sanity-io/sanity-plugin-bynder-input/commit/e064909b75836ba0e853b93b811388b8f165534b))
+
 ## [2.2.0](https://github.com/sanity-io/sanity-plugin-bynder-input/compare/v2.1.0...v2.2.0) (2025-03-21)
 
 ### Features
