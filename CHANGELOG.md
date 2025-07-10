@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/sanity-io/sanity-plugin-bynder-input/compare/v2.3.0...v2.3.1) (2025-07-10)
+
+### Bug Fixes
+
+- **deps:** allow studio v4 in peer dep ranges + update main.yml ([#29](https://github.com/sanity-io/sanity-plugin-bynder-input/issues/29)) ([fa463c0](https://github.com/sanity-io/sanity-plugin-bynder-input/commit/fa463c0e56570be7ad0cb63405c5a87051873d03))
+
 ## [2.3.0](https://github.com/sanity-io/sanity-plugin-bynder-input/compare/v2.2.0...v2.3.0) (2025-06-10)
 
 ### Features
