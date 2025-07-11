@@ -1,4 +1,3 @@
-> This is a **Sanity Studio v3** plugin.
 > For the v2 version, please refer to the [v2 version](https://github.com/sanity-io/sanity-plugin-bynder-input/tree/studio-v2).
 
 # Sanity + Bynder = 🌁
