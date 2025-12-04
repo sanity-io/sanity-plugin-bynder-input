@@ -26,10 +26,16 @@ You can also specify which language you want the Bynder widget UI to render.
     // ... other config
     plugins: [
       bynderInputPlugin(
-        {
-          portalDomain: "https://wave-trial.getbynder.com/",
-          language: "en_US"
-        }
+          {
+            portalConfig: {
+              // See Bynder Compact View docs for all options
+              url: "https://wave-trial.getbynder.com/"
+            },
+            compactViewOptions: {
+              // See Bynder Compact View docs for all options
+              language: "en_US"
+            }
+          }
       )
     ]
  })
@@ -104,14 +110,15 @@ export const myDocumentSchema = defineType({
 
 Here is the full set of options for the `assetFilter`.
 ```typescript
+// See https://www.npmjs.com/package/@bynder/compact-view for latest options
 type BynderAssetFilterJson = {
-  assetType_in?: BynderAssetType[]; //predefined asset types
-  collectionId?: string; //predefined collection id
-  metapropertyOptionId_in?: string[]; //predefined metaproperty IDs
-  searchTerm?: string; //predefined search term
-  tagNames_in?: string[]; //predefined tags
-  isLimitedUse?: boolean; //whether or not this asset is marked as Limited Use
-  showToolbar?: boolean; //show toolbar for predefined filters (false by default)
+  predefinedAssetType?: ('AUDIO' | 'DOCUMENT' | 'IMAGE' | 'VIDEO' | 'ARCHIVE')[]; // predefined asset types
+  collectionId?: string; // predefined collection id
+  predefinedMetapropertiesOptions?: string[]; // predefined metaproperty IDs
+  searchTerm?: string; // predefined search term
+  predefinedTagNames?: string[]; // predefined tags
+  isLimitedUse?: boolean; // whether or not this asset is marked as Limited Use
+  showToolbar?: boolean; // show toolbar for predefined filters (false by default)
 };
 ```
 

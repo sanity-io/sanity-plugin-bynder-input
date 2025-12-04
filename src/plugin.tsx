@@ -6,9 +6,14 @@ import { bynderAssetSchema, BynderAssetValue } from './schema/bynder.asset';
 export const bynderInputPlugin = definePlugin(
   (config: Partial<BynderConfig>) => {
     const reqConfig: BynderConfig = {
-      portalDomain: '',
-      language: 'en_US',
-      ...config,
+      portalConfig: {
+        url: '',
+        ...config?.portalConfig,
+      },
+      compactViewOptions: {
+        language: 'en_US',
+        ...config?.compactViewOptions,
+      },
     };
 
     return {
